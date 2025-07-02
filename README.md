@@ -1,7 +1,3 @@
-Certainly! Here’s a significantly improved version of your README.md, ready for immediate copy-paste. This version includes a clear project overview, setup instructions, usage examples, organized documentation, and a professional structure. You may further customize the details as needed.
-
----
-
 # Transformers for Gene Expression Prediction from Raw DNA Sequences
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
