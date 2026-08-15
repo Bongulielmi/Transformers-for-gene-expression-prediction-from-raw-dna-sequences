@@ -4,19 +4,15 @@ from tensorflow.keras import layers
 from scipy import stats
 from keras.models import Model, load_model
 import numpy as np
+from matplotlib import pyplot
 import datetime, os
-%pylab inline
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from IPython.display import display, Image
 from keras.callbacks import Callback, ModelCheckpoint, EarlyStopping
 from keras import backend as K
-
-try:
-  # %tensorflow_version only exists in Colab.
-  %tensorflow_version 2.x
-except Exception:
-  pass
+import seaborn as sns
+import pandas as pd
 
 
 class projTFNet:

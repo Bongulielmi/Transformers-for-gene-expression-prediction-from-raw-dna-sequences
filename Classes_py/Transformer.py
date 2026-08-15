@@ -19,16 +19,6 @@ import pickle
 import seaborn as sns
 import pandas as pd
 
-try:
-  # %tensorflow_version only exists in Colab.
-#   %tensorflow_version 2.x
-except Exception:
-  pass
-# Load the TensorBoard notebook extension
-# %load_ext tensorboard
-# Clear any logs from previous runs
-!rm -rf ./logs/
-
 """# keras """
 
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
@@ -86,7 +76,7 @@ class TransformerBlock(layers.Layer):
         return self.layernorm2(out1 + ffn_output)
 
 def fft2d(x):   
-    return tf.math.real(tf.signal.fft2d(tf.cast(x, complex64)))
+    return tf.math.real(tf.signal.fft2d(tf.cast(x, tf.complex64)))
 
 class FNETBlock(layers.Layer):
     def __init__(self, embed_dim, ff_dim, rate=0.1, compression=False):
@@ -401,7 +391,7 @@ class projTransformer:
         earlystop_cb = EarlyStopping(monitor='val_loss', patience=self.patience, verbose=1, mode='min', restore_best_weights=TPU)
 
         if TPU == True:
-            if self.lr_reduction_epoch is not None and self.optimizer is not "Original":
+            if self.lr_reduction_epoch is not None and self.optimizer != "Original":
                 scheduler_callback = tf.keras.callbacks.LearningRateScheduler(self.lr_scheduler, verbose=1)
                 callbacks = [history,
                                 scheduler_callback,
@@ -410,7 +400,7 @@ class projTransformer:
                 callbacks = [history,
                                 earlystop_cb]
         else:
-            if self.lr_reduction_epoch is not None and self.optimizer is not "Original":
+            if self.lr_reduction_epoch is not None and self.optimizer != "Original":
                 scheduler_callback = tf.keras.callbacks.LearningRateScheduler(self.lr_scheduler, verbose=1)
                 callbacks = [history,
                                 check_cb,
