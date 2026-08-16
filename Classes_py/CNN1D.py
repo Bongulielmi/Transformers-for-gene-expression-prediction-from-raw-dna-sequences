@@ -6,7 +6,6 @@ from keras.models import Model, load_model
 import numpy as np
 from matplotlib import pyplot
 import datetime, os
-%pylab inline
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from IPython.display import display, Image
@@ -15,11 +14,6 @@ from keras import backend as K
 import seaborn as sns
 import pandas as pd
 
-try:
-  # %tensorflow_version only exists in Colab.
-  %tensorflow_version 2.x
-except Exception:
-  pass
 
 class TokenEmbedding(layers.Layer):
     def __init__(self, maxlen, vocab_size, embed_dim):
